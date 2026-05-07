@@ -1,4 +1,5 @@
-import { Compass, Lock, Sparkles, ShieldCheck, Wallet, Leaf, Plus, Minus, Mail } from "lucide-react"
+import { Cup, Lock, Sparkles, ShieldCheck, Wallet, Leaf, Plus, Minus, Mail, Phone, MapPin, Clock } from "lucide-react"
+import Icon from "@/components/ui/icon"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
@@ -16,24 +17,24 @@ const Index = () => {
 
   const faqs: FAQ[] = [
     {
-      question: "Насколько физически сложен этот тур?",
+      question: "Какой чай лучше выбрать для начинающих?",
       answer:
-        "Экспедиция в Скрытую Долину требует отличной физической подготовки. Вам предстоит пройти более 15 км по джунглям, спуститься по веревке с 80-метровой высоты и преодолеть подземные реки. Участники должны быть готовы нести рюкзак весом 15 кг и иметь опыт спелеологии или треккинга.",
+        "Если вы только начинаете своё знакомство с миром чая, рекомендуем классические сорта: мягкий зелёный китайский Лун Цзин, душистый улун Те Гуань Инь или ароматный красный Дянь Хун. Наши консультанты с удовольствием помогут подобрать чай именно под ваш вкус — просто расскажите, что вам нравится.",
     },
     {
-      question: "Что входит в стоимость тура?",
+      question: "Как правильно заваривать чай?",
       answer:
-        "В стоимость экспедиции включены все разрешения, профессиональные гиды, снаряжение для безопасности, палаточное оборудование, питание на маршруте, трансфер от базового лагеря и страховка экстренной эвакуации. Личные вещи, такие как одежда и средства гигиены, не включены.",
+        "Каждый чай требует своей температуры и времени заваривания. Зелёный чай — 70-80°C, 1-2 минуты. Красный (чёрный) — 90-95°C, 3-5 минут. Пуэр — кипяток, 2-3 минуты. При покупке мы всегда даём подробные инструкции и маленькую памятку по заварке.",
     },
     {
-      question: "Безопасно ли исследовать пещеру Скрытой Долины?",
+      question: "Можно ли попробовать чай перед покупкой?",
       answer:
-        "Безопасность — наш абсолютный приоритет. Все гиды — сертифицированные спасатели-спелеологи, мы используем профессиональное снаряжение, поддерживаем постоянную связь с базовым лагерем и имеем комплексные протоколы на случай ЧП. Погодные условия отслеживаются непрерывно.",
+        "Конечно! В нашем магазине всегда есть возможность продегустировать выбранный сорт. Мы убеждены: хороший чай нужно сначала почувствовать. Приходите, наливаем чашку и рассказываем о каждом сорте.",
     },
     {
-      question: "Как забронировать место?",
+      question: "Как хранить чай дома?",
       answer:
-        "Группы ограничены 10 участниками, экспедиции проводятся только в сухой сезон (февраль-август). Бронируйте за 6-12 месяцев через наш сайт. Предоплата 50% закрепляет ваше место, полная оплата — за 30 дней до выезда.",
+        "Чай лучше всего хранить в плотно закрытых жестяных или керамических банках, вдали от запахов, влаги и прямых солнечных лучей. Зелёный чай желательно хранить в холодильнике. У нас в магазине вы найдёте широкий выбор красивых и практичных чайниц для хранения.",
     },
   ]
 
@@ -45,23 +46,23 @@ const Index = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url(https://www.elledecoration.vn/wp-content/uploads/2025/03/1-son-doong.jpg)",
+            backgroundImage: `url(https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/0280cb3b-578d-4c36-9fa6-bf01b1824dca.jpg)`,
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/85" />
         </div>
 
         {/* Navigation */}
         <nav className="relative z-10 flex items-center justify-between p-6">
           {/* Logo */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <Compass className="w-5 h-5" />
-            <span className="font-medium text-balance">Horizon Adventures</span>
+            <Icon name="Coffee" size={20} />
+            <span className="font-medium text-balance">Самовар · Тамбов</span>
           </div>
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-1">
-            {["Экспедиция", "Безопасность", "Галерея", "Вопросы", "Контакты"].map((item) => (
+            {["Ассортимент", "О магазине", "Чайная школа", "Вопросы", "Контакты"].map((item) => (
               <a
                 key={item}
                 href="#"
@@ -75,12 +76,12 @@ const Index = () => {
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
             <a
-              href="#"
+              href="tel:+74752000000"
               className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors"
             >
-              Войти
+              Позвонить
             </a>
-            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Забронировать</Button>
+            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Купить чай</Button>
           </div>
         </nav>
 
@@ -88,35 +89,35 @@ const Index = () => {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-6 text-center">
           {/* Badge */}
           <div className="mb-6 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <span className="text-sm font-medium">Эксклюзивные групповые экспедиции</span>
+            <span className="text-sm font-medium">Чайный магазин в Тамбове с 2010 года</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-6 text-balance">Войдите в затерянный мир.</h1>
+          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-6 text-balance">Настоящий чай.</h1>
 
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-white/90 max-w-4xl mb-12 leading-relaxed text-pretty">
-            Исследуйте грандиозные залы пещеры Скрытой Долины в Южной Америке — уникальную экосистему с собственными джунглями и погодой — в рамках 4-дневной экспедиции с гидом.
+            Более 200 сортов элитного чая из Китая, Японии, Индии и Цейлона. Авторские купажи, редкие пуэры и классика — всё в одном месте в самом сердце Тамбова.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-4 text-lg">
-              Забронировать экспедицию
+              Смотреть ассортимент
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="bg-black/40 ring-1 ring-white/20 backdrop-blur border-0 text-white hover:bg-black/50 rounded-full px-8 py-4 text-lg"
             >
-              Смотреть маршрут
+              Как нас найти
             </Button>
           </div>
 
           {/* Footer Note */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <Lock className="w-4 h-4" />
-            <span className="text-sm font-medium">Безопасность — наш приоритет</span>
+            <Icon name="Star" size={16} />
+            <span className="text-sm font-medium">Бесплатная дегустация при каждом визите</span>
           </div>
         </div>
       </div>
@@ -125,111 +126,111 @@ const Index = () => {
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {/* Expert-Led Tours */}
+            {/* Expert Advice */}
             <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Sparkles className="w-6 h-6" />
+                <Icon name="Sparkles" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Туры с экспертами</h3>
-              <p className="text-white/80 leading-relaxed">Ведут геологи, спелеологи и местные специалисты.</p>
+              <h3 className="text-xl font-semibold mb-4">Экспертный подбор</h3>
+              <p className="text-white/80 leading-relaxed">Консультанты помогут выбрать чай под ваш вкус и случай.</p>
             </div>
 
-            {/* World-Class Safety */}
+            {/* Quality */}
             <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <ShieldCheck className="w-6 h-6" />
+                <Icon name="ShieldCheck" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Мировой уровень безопасности</h3>
-              <p className="text-white/80 leading-relaxed">Строгие протоколы и современное снаряжение.</p>
+              <h3 className="text-xl font-semibold mb-4">Проверенное качество</h3>
+              <p className="text-white/80 leading-relaxed">Прямые поставки от проверенных плантаций и поставщиков.</p>
             </div>
 
-            {/* All-Inclusive Package */}
+            {/* Price */}
             <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Wallet className="w-6 h-6" />
+                <Icon name="Wallet" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Все включено</h3>
-              <p className="text-white/80 leading-relaxed">Разрешения, снаряжение, питание и трансфер.</p>
+              <h3 className="text-xl font-semibold mb-4">Честные цены</h3>
+              <p className="text-white/80 leading-relaxed">Чай на любой бюджет — от 200 ₽ до редких коллекций.</p>
             </div>
 
-            {/* Eco-Friendly Caving */}
+            {/* Gifts */}
             <div className="rounded-2xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-8 text-center">
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-black/30 ring-1 ring-white/20 mb-6">
-                <Leaf className="w-6 h-6" />
+                <Icon name="Gift" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Эко-спелеология</h3>
-              <p className="text-white/80 leading-relaxed">Мы бережно сохраняем экосистему пещеры.</p>
+              <h3 className="text-xl font-semibold mb-4">Чайные подарки</h3>
+              <p className="text-white/80 leading-relaxed">Красивые подарочные наборы для любого праздника.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Journey Section */}
+      {/* Journey Section — Чайный путь */}
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12">
             {/* Section Header */}
             <div className="text-center mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Ваше эпическое путешествие</h2>
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">Путь от листа до чашки</h2>
               <p className="text-xl text-white/80 max-w-3xl mx-auto text-pretty">
-                От джунглей до подземных лагерей — вот что вас ждет.
+                Мы знаем каждый шаг — от плантации до вашего стола.
               </p>
             </div>
 
             {/* Journey Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-              {/* Phase 1: Briefing & Prep */}
+              {/* Phase 1 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">01.</div>
-                  <h3 className="text-xl font-semibold mb-4">Инструктаж</h3>
+                  <h3 className="text-xl font-semibold mb-4">Плантация</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Ваше приключение начинается в базовом лагере с полного инструктажа по безопасности и проверки снаряжения.
+                    Мы работаем напрямую с плантациями Юньнани, Фуцзяни, Дарджилинга и Цейлона. Только свежий урожай, только проверенные хозяйства.
                   </p>
                 </div>
               </div>
 
-              {/* Phase 2: The Trek */}
+              {/* Phase 2 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">02.</div>
-                  <h3 className="text-xl font-semibold mb-4">Треккинг</h3>
+                  <h3 className="text-xl font-semibold mb-4">Отбор</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Идите через нетронутые джунгли, пересекайте реки и ночуйте в удаленных точках по пути ко входу в Скрытую Долину.
+                    Каждая партия проходит проверку: аромат, вкус, внешний вид листа. В продажу поступает только то, что прошло наш строгий отбор.
                   </p>
                 </div>
               </div>
 
-              {/* Phase 3: Caving */}
+              {/* Phase 3 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">03.</div>
-                  <h3 className="text-xl font-semibold mb-4">Спелеология</h3>
+                  <h3 className="text-xl font-semibold mb-4">Хранение</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Спуститесь в пещеру, чтобы увидеть гигантские сталагмиты, исследовать огромные залы и уникальные подземные джунгли.
+                    Чай хранится в специальных условиях — без лишних запахов, при правильной влажности и температуре, чтобы донести до вас весь аромат.
                   </p>
                 </div>
               </div>
 
-              {/* Phase 4: Base Camp */}
+              {/* Phase 4 */}
               <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-8 h-80 flex flex-col">
                 <div className="flex-1">
                   <div className="text-3xl font-bold text-white/60 mb-4">04.</div>
-                  <h3 className="text-xl font-semibold mb-4">Базовый лагерь</h3>
+                  <h3 className="text-xl font-semibold mb-4">Ваша чашка</h3>
                   <p className="text-white/80 leading-relaxed text-sm">
-                    Проведите ночи на потрясающих стоянках внутри пещеры, делясь историями с группой перед обратным путем.
+                    Вы приходите к нам, пробуете, выбираете и уносите домой живой вкус настоящего чая. Мы всегда рядом, чтобы помочь с заваркой.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Check Availability Button */}
+            {/* CTA Button */}
             <div className="text-center">
               <Button
                 size="lg"
                 className="bg-white text-black hover:bg-white/90 rounded-full px-12 py-4 text-lg font-semibold"
               >
-                Проверить наличие мест
+                Посетить магазин
               </Button>
             </div>
           </div>
@@ -241,13 +242,13 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              {/* Left Column - Title and Description */}
+              {/* Left Column */}
               <div>
                 <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
                   Частые вопросы
                 </h2>
                 <p className="text-xl text-white/80 leading-relaxed text-pretty">
-                  Все, что нужно знать об экспедиции: от физических требований до бронирования места в этом эксклюзивном приключении.
+                  Всё о чае, заварке, хранении и нашем магазине — коротко и по делу.
                 </p>
               </div>
 
@@ -264,9 +265,9 @@ const Index = () => {
                     >
                       <h3 className="text-lg font-semibold pr-4">{faq.question}</h3>
                       {openFaq === index ? (
-                        <Minus className="w-5 h-5 flex-shrink-0" />
+                        <Icon name="Minus" size={20} className="flex-shrink-0" />
                       ) : (
-                        <Plus className="w-5 h-5 flex-shrink-0" />
+                        <Icon name="Plus" size={20} className="flex-shrink-0" />
                       )}
                     </button>
                     {openFaq === index && (
@@ -294,7 +295,7 @@ const Index = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               {/* Left Column - Contact Form */}
               <div className="rounded-2xl bg-white/95 text-black p-8 shadow-2xl">
-                <h3 className="text-2xl font-bold mb-6">Отправить запрос</h3>
+                <h3 className="text-2xl font-bold mb-6">Задать вопрос</h3>
                 <form className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -303,19 +304,19 @@ const Index = () => {
                     <input
                       type="text"
                       id="name"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Ваше полное имя"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      placeholder="Ваше имя"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email
+                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                      Телефон
                     </label>
                     <input
-                      type="email"
-                      id="email"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="your.email@example.com"
+                      type="tel"
+                      id="phone"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                      placeholder="+7 (___) ___-__-__"
                     />
                   </div>
                   <div>
@@ -325,8 +326,8 @@ const Index = () => {
                     <textarea
                       id="message"
                       rows={5}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      placeholder="Расскажите о ваших интересах в экспедиции..."
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-transparent resize-none"
+                      placeholder="Интересует конкретный сорт чая или нужна помощь с выбором подарка?"
                     />
                   </div>
                   <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg py-3 font-normal text-base">
@@ -339,27 +340,50 @@ const Index = () => {
               <div className="space-y-8">
                 <div>
                   <p className="text-xl text-white/90 leading-relaxed text-pretty">
-                    По вопросам индивидуальных туров, партнерства или для СМИ — свяжитесь с нами. Мы отвечаем в течение одного рабочего дня.
+                    Приходите в наш магазин — мы угостим вас чашкой хорошего чая и поможем с выбором. Работаем каждый день.
                   </p>
                 </div>
 
-                {/* Profile Card */}
-                <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
-                  <div className="flex items-center gap-4 mb-4">
-                    <img
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
-                      alt="Маркус Уильямс"
-                      className="w-16 h-16 rounded-full object-cover"
-                    />
-                    <div>
-                      <h4 className="text-lg font-semibold">Маркус Уильямс</h4>
-                      <p className="text-gray-600">Руководитель экспедиций</p>
+                {/* Info Cards */}
+                <div className="space-y-4">
+                  <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                        <Icon name="MapPin" size={20} className="text-amber-700" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Адрес</p>
+                        <p className="text-gray-600 mt-1">г. Тамбов, ул. Советская, 108</p>
+                      </div>
                     </div>
                   </div>
-                  <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-lg flex items-center justify-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    Написать
-                  </Button>
+
+                  <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                        <Icon name="Clock" size={20} className="text-amber-700" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Режим работы</p>
+                        <p className="text-gray-600 mt-1">Пн–Пт: 9:00 – 19:00</p>
+                        <p className="text-gray-600">Сб–Вс: 10:00 – 18:00</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                        <Icon name="Phone" size={20} className="text-amber-700" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-900">Телефон</p>
+                        <a href="tel:+74752000000" className="text-amber-700 hover:underline mt-1 block font-medium">
+                          +7 (4752) 00-00-00
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -376,19 +400,19 @@ const Index = () => {
               {/* Brand Section */}
               <div className="lg:col-span-2">
                 <div className="flex items-center gap-2 mb-6">
-                  <Compass className="w-6 h-6" />
-                  <span className="text-xl font-semibold">Horizon Adventures</span>
+                  <Icon name="Coffee" size={24} />
+                  <span className="text-xl font-semibold">Самовар · Тамбов</span>
                 </div>
                 <p className="text-white/80 leading-relaxed text-pretty">
-                  Официальный туроператор экспедиций в Скрытую Долину — крупнейшую пещеру мира. Мы преданы безопасности, охране природы и незабываемым приключениям.
+                  Чайный магазин «Самовар» — более 200 сортов чая со всего мира. Экспертные консультации, дегустации, подарочные наборы. Работаем с 2010 года.
                 </p>
               </div>
 
-              {/* Expedition Links */}
+              {/* Assortment Links */}
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">ЭКСПЕДИЦИЯ</h3>
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">АССОРТИМЕНТ</h3>
                 <ul className="space-y-3">
-                  {["Маршрут", "Цены", "Список снаряжения", "Фотогалерея"].map((item) => (
+                  {["Зелёный чай", "Красный чай", "Пуэр", "Улун", "Белый чай"].map((item) => (
                     <li key={item}>
                       <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">
                         {item}
@@ -400,9 +424,9 @@ const Index = () => {
 
               {/* About Links */}
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">О НАС</h3>
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">О МАГАЗИНЕ</h3>
                 <ul className="space-y-3">
-                  {["Наша миссия", "Стандарты безопасности", "Команда", "Охрана природы"].map((item) => (
+                  {["О нас", "Наши поставщики", "Чайная школа", "Акции"].map((item) => (
                     <li key={item}>
                       <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">
                         {item}
@@ -412,11 +436,11 @@ const Index = () => {
                 </ul>
               </div>
 
-              {/* Resources Links */}
+              {/* Support Links */}
               <div>
-                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">ПОДДЕРЖКА</h3>
+                <h3 className="text-sm font-bold uppercase tracking-wider mb-6">ПОМОЩЬ</h3>
                 <ul className="space-y-3">
-                  {["Справочный центр", "Контакты", "Вопросы и ответы", "Условия"].map((item) => (
+                  {["Как выбрать чай", "Как заваривать", "Доставка", "Контакты"].map((item) => (
                     <li key={item}>
                       <a href="#" className="text-white/70 hover:text-white transition-colors text-sm leading-relaxed">
                         {item}
@@ -430,7 +454,7 @@ const Index = () => {
             {/* Newsletter Section */}
             <div className="border-t border-white/10 pt-12 mb-12">
               <div className="max-w-md">
-                <h3 className="text-lg font-semibold mb-4">Новости экспедиций</h3>
+                <h3 className="text-lg font-semibold mb-4">Чайные новинки и акции</h3>
                 <div className="flex gap-3">
                   <input
                     type="email"
@@ -444,7 +468,7 @@ const Index = () => {
 
             {/* Sub-footer */}
             <div className="border-t border-white/10 pt-8">
-              <p className="text-white/60 text-sm text-center">© 2025 Horizon Adventures</p>
+              <p className="text-white/60 text-sm text-center">© 2025 Чайный магазин «Самовар», г. Тамбов</p>
             </div>
           </div>
         </div>
