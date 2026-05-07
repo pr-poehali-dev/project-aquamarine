@@ -76,12 +76,14 @@ const Index = () => {
           {/* Action Buttons */}
           <div className="flex items-center gap-3">
             <a
-              href="tel:+74752000000"
+              href="tel:+79531232355"
               className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors"
             >
-              Позвонить
+              +7 (953) 123-23-55
             </a>
-            <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Купить чай</Button>
+            <a href="/catalog">
+              <Button className="bg-white text-black hover:bg-white/90 rounded-full px-6">Каталог</Button>
+            </a>
           </div>
         </nav>
 
@@ -351,21 +353,25 @@ const Index = () => {
                       name: "Чайный клуб, чайная, кофейня и магазин чая Самовар",
                       address: "ул. Кронштадтская, д. 9",
                       hours: "10:00 – 21:45",
+                      map: "https://yandex.ru/maps/15/tambov/?text=Тамбов%2C+ул.+Кронштадтская%2C+9",
                     },
                     {
                       name: "Самовар – отдел в ГМ Улей",
                       address: "Супермаркет «Улей», ул. Бульвар Энтузиастов, д. 2А",
                       hours: "10:00 – 21:00",
+                      map: "https://yandex.ru/maps/15/tambov/?text=Тамбов%2C+Бульвар+Энтузиастов%2C+2А",
                     },
                     {
                       name: "Самовар – отдел в ГМ Магнит",
                       address: "Гипермаркет «Магнит», ул. Советская, д. 190",
                       hours: "10:00 – 21:45",
+                      map: "https://yandex.ru/maps/15/tambov/?text=Тамбов%2C+ул.+Советская%2C+190",
                     },
                     {
                       name: "Самовар – отдел в ТЦ Европа",
                       address: "ТЦ «Европа», ул. Рылеева, д. 83",
                       hours: "10:00 – 21:30",
+                      map: "https://yandex.ru/maps/15/tambov/?text=Тамбов%2C+ул.+Рылеева%2C+83",
                     },
                   ].map((loc) => (
                     <div key={loc.name} className="rounded-2xl bg-white/95 text-black p-5 shadow-2xl">
@@ -373,12 +379,23 @@ const Index = () => {
                         <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <Icon name="MapPin" size={18} className="text-amber-700" />
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <p className="font-semibold text-gray-900 text-sm leading-snug">{loc.name}</p>
                           <p className="text-gray-600 text-sm mt-1">г. Тамбов, {loc.address}</p>
-                          <div className="flex items-center gap-1.5 mt-1.5">
-                            <Icon name="Clock" size={13} className="text-amber-600" />
-                            <p className="text-amber-700 text-sm font-medium">{loc.hours}</p>
+                          <div className="flex items-center justify-between mt-1.5">
+                            <div className="flex items-center gap-1.5">
+                              <Icon name="Clock" size={13} className="text-amber-600" />
+                              <p className="text-amber-700 text-sm font-medium">{loc.hours}</p>
+                            </div>
+                            <a
+                              href={loc.map}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs text-amber-700 hover:underline flex items-center gap-1"
+                            >
+                              <Icon name="Navigation" size={12} />
+                              Открыть на карте
+                            </a>
                           </div>
                         </div>
                       </div>
