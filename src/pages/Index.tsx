@@ -337,53 +337,53 @@ const Index = () => {
               </div>
 
               {/* Right Column - Contact Info */}
-              <div className="space-y-8">
+              <div className="space-y-6">
                 <div>
                   <p className="text-xl text-white/90 leading-relaxed text-pretty">
-                    Приходите в наш магазин — мы угостим вас чашкой хорошего чая и поможем с выбором. Работаем каждый день.
+                    Приходите в любой из наших отделов — угостим чашкой хорошего чая и поможем с выбором.
                   </p>
                 </div>
 
-                {/* Info Cards */}
+                {/* Location Cards */}
                 <div className="space-y-4">
-                  <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                        <Icon name="MapPin" size={20} className="text-amber-700" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900">Адрес</p>
-                        <p className="text-gray-600 mt-1">г. Тамбов, ул. Советская, 108</p>
+                  {[
+                    {
+                      name: "Чайный клуб, чайная, кофейня и магазин чая Самовар",
+                      address: "ул. Кронштадтская, д. 9",
+                      hours: "10:00 – 21:45",
+                    },
+                    {
+                      name: "Самовар – отдел в ГМ Улей",
+                      address: "Супермаркет «Улей», ул. Бульвар Энтузиастов, д. 2А",
+                      hours: "10:00 – 21:00",
+                    },
+                    {
+                      name: "Самовар – отдел в ГМ Магнит",
+                      address: "Гипермаркет «Магнит», ул. Советская, д. 190",
+                      hours: "10:00 – 21:45",
+                    },
+                    {
+                      name: "Самовар – отдел в ТЦ Европа",
+                      address: "ТЦ «Европа», ул. Рылеева, д. 83",
+                      hours: "10:00 – 21:30",
+                    },
+                  ].map((loc) => (
+                    <div key={loc.name} className="rounded-2xl bg-white/95 text-black p-5 shadow-2xl">
+                      <div className="flex items-start gap-4">
+                        <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <Icon name="MapPin" size={18} className="text-amber-700" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900 text-sm leading-snug">{loc.name}</p>
+                          <p className="text-gray-600 text-sm mt-1">г. Тамбов, {loc.address}</p>
+                          <div className="flex items-center gap-1.5 mt-1.5">
+                            <Icon name="Clock" size={13} className="text-amber-600" />
+                            <p className="text-amber-700 text-sm font-medium">{loc.hours}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                        <Icon name="Clock" size={20} className="text-amber-700" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900">Режим работы</p>
-                        <p className="text-gray-600 mt-1">Пн–Пт: 9:00 – 19:00</p>
-                        <p className="text-gray-600">Сб–Вс: 10:00 – 18:00</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="rounded-2xl bg-white/95 text-black p-6 shadow-2xl">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                        <Icon name="Phone" size={20} className="text-amber-700" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-gray-900">Телефон</p>
-                        <a href="tel:+74752000000" className="text-amber-700 hover:underline mt-1 block font-medium">
-                          +7 (4752) 00-00-00
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
