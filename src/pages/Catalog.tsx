@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
+import { useCart } from "@/lib/cartContext"
 
 interface Category {
   id: string
@@ -30,6 +31,27 @@ const categories: Category[] = [
   { id: "chocolate", label: "Горячий шоколад и какао", icon: "Candy" },
   { id: "dishes", label: "Посуда", icon: "Utensils" },
 ]
+
+const categoryImages: Record<string, string> = {
+  "tea-green":    "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/251eaf03-2e89-4217-89bb-56754fa68e82.jpg",
+  "tea-red":      "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/6e0e3035-f3d1-4732-a287-664ec049cea5.jpg",
+  "tea-oolong":   "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/48284d75-87fb-4efb-8f95-96a976d688e9.jpg",
+  "tea-puer":     "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/fbcd4ba0-fe50-464e-afcc-bb4bc1076301.jpg",
+  "tea-white":    "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/dca29969-a10b-4768-ba39-5590c630a49e.jpg",
+  "tea-herbal":   "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/f84940fe-7c49-4d86-9eba-16b3292e65d4.jpg",
+  "coffee-mono":  "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/04fc241c-e215-4fdb-98a6-b8ffcc1b276d.jpg",
+  "coffee-blend": "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/04fc241c-e215-4fdb-98a6-b8ffcc1b276d.jpg",
+  "coffee-syrup": "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/fd3ab2fd-2782-4463-841f-e7f108c0b27d.jpg",
+  "gifts":        "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/95c79b49-b0a3-490a-94ca-d0932490a792.jpg",
+  "mate":         "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/6ad6fa9f-a779-416d-b9d7-0c942507df56.jpg",
+  "chocolate":    "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/cadb4fe3-6c6a-4c30-8ff8-67e4dd42213a.jpg",
+  "dishes":       "https://cdn.poehali.dev/projects/32364a2a-1dcf-4a33-ba06-66234a8d87f6/files/e2ae94ad-a188-4811-bca8-42886971e3b6.jpg",
+}
+
+const parsePrice = (price: string): number => {
+  const match = price.replace(/\s/g, "").match(/\d+/)
+  return match ? parseInt(match[0]) : 0
+}
 
 interface Product {
   id: number
@@ -217,6 +239,8 @@ const getSubcategories = (parentId: string) => categories.filter(c => c.parent =
 
 const Catalog = () => {
   const [activeCategory, setActiveCategory] = useState("all")
+  const { addItem, count } = useCart()
+  const [added, setAdded] = useState<number | null>(null)
 
   const filtered =
     activeCategory === "all"
@@ -230,6 +254,19 @@ const Catalog = () => {
   const activeTop = topCategories.find(c => c.id === activeCategory || getSubcategories(c.id).some(s => s.id === activeCategory))
   const subcategories = activeTop ? getSubcategories(activeTop.id) : []
 
+  const handleAdd = (product: Product) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      priceNum: parsePrice(product.price),
+      category: product.category,
+      image: categoryImages[product.category] ?? categoryImages["tea-green"],
+    })
+    setAdded(product.id)
+    setTimeout(() => setAdded(null), 1200)
+  }
+
   return (
     <div className="min-h-screen bg-[#0B0F12] text-white">
       {/* Navigation */}
@@ -242,11 +279,14 @@ const Catalog = () => {
           <Icon name="Coffee" size={20} />
           <span className="font-semibold text-lg hidden sm:block">Каталог · Самовар</span>
         </div>
-        <a
-          href="tel:+79531232355"
-          className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors text-sm"
-        >
-          +7 (953) 123-23-55
+        <a href="/cart" className="relative flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors text-sm">
+          <Icon name="ShoppingCart" size={16} />
+          <span className="hidden sm:inline">Корзина</span>
+          {count > 0 && (
+            <span className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-amber-500 rounded-full text-xs font-bold flex items-center justify-center text-white">
+              {count}
+            </span>
+          )}
         </a>
       </nav>
 
@@ -311,37 +351,42 @@ const Catalog = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((product) => {
-            const cat = categories.find(c => c.id === product.category)
+            const img = categoryImages[product.category] ?? categoryImages["tea-green"]
+            const isAdded = added === product.id
             return (
               <div
                 key={product.id}
-                className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-6 flex flex-col gap-4 hover:bg-white/[0.08] hover:ring-white/20 transition-all"
+                className="rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur flex flex-col overflow-hidden hover:bg-white/[0.08] hover:ring-white/20 transition-all"
               >
-                <div className="w-full h-32 rounded-xl bg-white/5 flex items-center justify-center">
-                  <Icon
-                    name={cat?.icon ?? "Package"}
-                    size={44}
-                    className="text-white/20"
-                  />
+                <div className="w-full h-40 overflow-hidden">
+                  <img src={img} alt={product.name} className="w-full h-full object-cover" />
                 </div>
-
-                <div className="flex-1 flex flex-col gap-2">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-semibold leading-snug text-sm">{product.name}</h3>
-                    {product.badge && (
-                      <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 font-medium ${badgeColor[product.badge]}`}>
-                        {product.badge}
-                      </span>
-                    )}
+                <div className="p-5 flex flex-col gap-3 flex-1">
+                  <div className="flex-1 flex flex-col gap-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="font-semibold leading-snug text-sm">{product.name}</h3>
+                      {product.badge && (
+                        <span className={`text-xs px-2 py-0.5 rounded-full flex-shrink-0 font-medium ${badgeColor[product.badge]}`}>
+                          {product.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-white/60 text-xs leading-relaxed">{product.description}</p>
                   </div>
-                  <p className="text-white/60 text-xs leading-relaxed">{product.description}</p>
-                </div>
-
-                <div className="flex items-center justify-between pt-2 border-t border-white/10">
-                  <span className="font-bold text-base">{product.price}</span>
-                  <Button size="sm" className="bg-white text-black hover:bg-white/90 rounded-full px-4 text-xs">
-                    Узнать
-                  </Button>
+                  <div className="flex items-center justify-between pt-2 border-t border-white/10">
+                    <span className="font-bold text-base">{product.price}</span>
+                    <button
+                      onClick={() => handleAdd(product)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
+                        isAdded
+                          ? "bg-emerald-500 text-white"
+                          : "bg-white text-black hover:bg-white/90"
+                      }`}
+                    >
+                      <Icon name={isAdded ? "Check" : "ShoppingCart"} size={12} />
+                      {isAdded ? "Добавлено" : "В корзину"}
+                    </button>
+                  </div>
                 </div>
               </div>
             )

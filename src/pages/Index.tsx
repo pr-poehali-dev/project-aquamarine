@@ -62,13 +62,18 @@ const Index = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-1">
-            {["Ассортимент", "О магазине", "Чайная школа", "Вопросы", "Контакты"].map((item) => (
+            {[
+              { label: "Ассортимент", href: "/catalog" },
+              { label: "О магазине", href: "#about" },
+              { label: "Вопросы", href: "#faq" },
+              { label: "Контакты", href: "#contacts" },
+            ].map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.label}
+                href={item.href}
                 className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
@@ -122,14 +127,14 @@ const Index = () => {
 
           {/* Footer Note */}
           <div className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full">
-            <Icon name="Star" size={16} />
-            <span className="text-sm font-medium">Бесплатная дегустация при каждом визите</span>
+            <Icon name="Sparkles" size={16} />
+            <span className="text-sm font-medium">Дегустация и чайные церемонии</span>
           </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <section className="relative z-10 py-24 px-6">
+      <section id="about" className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
             {/* Expert Advice */}
@@ -244,7 +249,7 @@ const Index = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="relative z-10 py-24 px-6">
+      <section id="faq" className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur p-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
