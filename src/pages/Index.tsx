@@ -104,16 +104,20 @@ const Index = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-4 text-lg">
-              Смотреть ассортимент
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="bg-black/40 ring-1 ring-white/20 backdrop-blur border-0 text-white hover:bg-black/50 rounded-full px-8 py-4 text-lg"
-            >
-              Как нас найти
-            </Button>
+            <a href="/catalog">
+              <Button size="lg" className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-4 text-lg">
+                Смотреть ассортимент
+              </Button>
+            </a>
+            <a href="#contacts">
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-black/40 ring-1 ring-white/20 backdrop-blur border-0 text-white hover:bg-black/50 rounded-full px-8 py-4 text-lg"
+              >
+                Как нас найти
+              </Button>
+            </a>
           </div>
 
           {/* Footer Note */}
@@ -286,7 +290,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="relative z-10 py-24 px-6">
+      <section id="contacts" className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="rounded-3xl bg-black/20 ring-1 ring-white/15 backdrop-blur p-12">
             {/* Section Header */}
