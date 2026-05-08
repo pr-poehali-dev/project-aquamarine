@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useCart } from "@/lib/cartContext"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
@@ -5,6 +6,20 @@ import Icon from "@/components/ui/icon"
 
 const Cart = () => {
   const { items, removeItem, updateQty, total, clear } = useCart()
+  const [showModal, setShowModal] = useState(false)
+  const [form, setForm] = useState({ name: "", phone: "", comment: "" })
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleOrder = () => {
+    if (!form.name.trim() || !form.phone.trim()) return
+    setSubmitted(true)
+    clear()
+    setTimeout(() => {
+      setShowModal(false)
+      setSubmitted(false)
+      setForm({ name: "", phone: "", comment: "" })
+    }, 3000)
+  }
 
   return (
     <div className="min-h-screen bg-[#0B0F12] text-white">
@@ -44,42 +59,26 @@ const Cart = () => {
               <h1 className="text-4xl font-bold mb-8">Корзина</h1>
               {items.map(item => (
                 <div key={item.id} className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5 flex gap-4 items-center">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-20 h-20 rounded-xl object-cover flex-shrink-0"
-                  />
+                  <img src={item.image} alt={item.name} className="w-20 h-20 rounded-xl object-cover flex-shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-sm leading-snug mb-1 truncate">{item.name}</p>
                     <p className="text-amber-400 font-bold">{item.price}</p>
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <button
-                      onClick={() => updateQty(item.id, item.quantity - 1)}
-                      className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-                    >
+                    <button onClick={() => updateQty(item.id, item.quantity - 1)} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
                       <Icon name="Minus" size={14} />
                     </button>
                     <span className="w-6 text-center font-semibold">{item.quantity}</span>
-                    <button
-                      onClick={() => updateQty(item.id, item.quantity + 1)}
-                      className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-                    >
+                    <button onClick={() => updateQty(item.id, item.quantity + 1)} className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors">
                       <Icon name="Plus" size={14} />
                     </button>
-                    <button
-                      onClick={() => removeItem(item.id)}
-                      className="w-8 h-8 rounded-full bg-red-500/20 hover:bg-red-500/30 flex items-center justify-center transition-colors ml-2"
-                    >
+                    <button onClick={() => removeItem(item.id)} className="w-8 h-8 rounded-full bg-red-500/20 hover:bg-red-500/30 flex items-center justify-center transition-colors ml-2">
                       <Icon name="Trash2" size={14} className="text-red-400" />
                     </button>
                   </div>
                 </div>
               ))}
-              <button
-                onClick={clear}
-                className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-1 mt-2"
-              >
+              <button onClick={clear} className="text-white/40 hover:text-white/70 text-sm transition-colors flex items-center gap-1 mt-2">
                 <Icon name="Trash2" size={14} />
                 Очистить корзину
               </button>
@@ -103,7 +102,10 @@ const Cart = () => {
                     <span className="text-amber-400">{total.toLocaleString("ru")} ₽</span>
                   </div>
                 </div>
-                <Button className="w-full bg-white text-black hover:bg-white/90 rounded-full py-3 text-base font-semibold mb-3">
+                <Button
+                  onClick={() => setShowModal(true)}
+                  className="w-full bg-white text-black hover:bg-white/90 rounded-full py-3 text-base font-semibold mb-3"
+                >
                   Оформить заказ
                 </Button>
                 <a href="tel:+79531232355" className="block text-center text-white/60 hover:text-white text-sm transition-colors">
@@ -114,6 +116,100 @@ const Cart = () => {
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center px-4"
+          style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
+          onClick={(e) => { if (e.target === e.currentTarget && !submitted) setShowModal(false) }}
+        >
+          <div className="w-full max-w-md rounded-3xl bg-[#0F1418] ring-1 ring-white/15 p-8 relative animate-in fade-in zoom-in-95 duration-200">
+
+            {!submitted ? (
+              <>
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold">Оформление заказа</h2>
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+                  >
+                    <Icon name="X" size={16} />
+                  </button>
+                </div>
+
+                {/* Order summary */}
+                <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-4 mb-6 space-y-2 max-h-40 overflow-y-auto">
+                  {items.map(item => (
+                    <div key={item.id} className="flex justify-between text-sm">
+                      <span className="text-white/70 truncate mr-2">{item.name} × {item.quantity}</span>
+                      <span className="flex-shrink-0 text-white">{(item.priceNum * item.quantity).toLocaleString("ru")} ₽</span>
+                    </div>
+                  ))}
+                  <div className="border-t border-white/10 pt-2 flex justify-between font-bold">
+                    <span>Итого</span>
+                    <span className="text-amber-400">{total.toLocaleString("ru")} ₽</span>
+                  </div>
+                </div>
+
+                {/* Form */}
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <label className="block text-sm text-white/60 mb-1.5">Ваше имя *</label>
+                    <input
+                      type="text"
+                      value={form.name}
+                      onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                      placeholder="Как к вам обращаться"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 ring-1 ring-white/15 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-white/60 mb-1.5">Телефон *</label>
+                    <input
+                      type="tel"
+                      value={form.phone}
+                      onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                      placeholder="+7 (___) ___-__-__"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 ring-1 ring-white/15 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-white/60 mb-1.5">Комментарий</label>
+                    <textarea
+                      value={form.comment}
+                      onChange={e => setForm(f => ({ ...f, comment: e.target.value }))}
+                      placeholder="Пожелания по заказу или вопросы..."
+                      rows={3}
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 ring-1 ring-white/15 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all resize-none"
+                    />
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleOrder}
+                  disabled={!form.name.trim() || !form.phone.trim()}
+                  className="w-full bg-white text-black hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed rounded-full py-3 text-base font-semibold"
+                >
+                  Подтвердить заказ
+                </Button>
+                <p className="text-center text-white/40 text-xs mt-3">Мы свяжемся с вами для уточнения деталей</p>
+              </>
+            ) : (
+              <div className="text-center py-6">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-5">
+                  <Icon name="CheckCircle" size={36} className="text-emerald-400" />
+                </div>
+                <h2 className="text-2xl font-bold mb-2">Заказ принят!</h2>
+                <p className="text-white/60 text-base leading-relaxed">
+                  Спасибо, {form.name}!<br />Мы позвоним вам на <span className="text-white">{form.phone}</span> в ближайшее время.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
