@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import { useCart } from "@/lib/cartContext"
@@ -271,15 +272,15 @@ const Catalog = () => {
     <div className="min-h-screen bg-[#0B0F12] text-white">
       {/* Navigation */}
       <nav className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#0B0F12]/80 backdrop-blur border-b border-white/10">
-        <a href="/" className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors">
+        <Link to="/" className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors">
           <Icon name="ArrowLeft" size={16} />
           <span className="font-medium">На главную</span>
-        </a>
+        </Link>
         <div className="flex items-center gap-2">
           <Icon name="Coffee" size={20} />
           <span className="font-semibold text-lg hidden sm:block">Каталог · Самовар</span>
         </div>
-        <a href="/cart" className="relative flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors text-sm">
+        <Link to="/cart" className="relative flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors text-sm">
           <Icon name="ShoppingCart" size={16} />
           <span className="hidden sm:inline">Корзина</span>
           {count > 0 && (
@@ -287,7 +288,7 @@ const Catalog = () => {
               {count}
             </span>
           )}
-        </a>
+        </Link>
       </nav>
 
       <div className="max-w-7xl mx-auto px-6 py-12">

@@ -1,4 +1,5 @@
 import { useCart } from "@/lib/cartContext"
+import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 
@@ -9,17 +10,17 @@ const Cart = () => {
     <div className="min-h-screen bg-[#0B0F12] text-white">
       {/* Navigation */}
       <nav className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-[#0B0F12]/80 backdrop-blur border-b border-white/10">
-        <a href="/catalog" className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors">
+        <Link to="/catalog" className="flex items-center gap-2 px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors">
           <Icon name="ArrowLeft" size={16} />
           <span className="font-medium">В каталог</span>
-        </a>
+        </Link>
         <div className="flex items-center gap-2">
           <Icon name="ShoppingCart" size={20} />
           <span className="font-semibold text-lg">Корзина</span>
         </div>
-        <a href="/" className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors text-sm">
+        <Link to="/" className="px-4 py-2 bg-black/40 ring-1 ring-white/20 backdrop-blur rounded-full hover:bg-black/50 transition-colors text-sm">
           На главную
-        </a>
+        </Link>
       </nav>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
@@ -30,11 +31,11 @@ const Cart = () => {
             </div>
             <h2 className="text-3xl font-bold mb-3">Корзина пуста</h2>
             <p className="text-white/60 mb-8 text-lg">Добавьте что-нибудь из каталога</p>
-            <a href="/catalog">
+            <Link to="/catalog">
               <Button className="bg-white text-black hover:bg-white/90 rounded-full px-8 py-3 text-base">
                 Перейти в каталог
               </Button>
-            </a>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
